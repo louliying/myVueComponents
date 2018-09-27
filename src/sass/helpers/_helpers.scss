@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+@mixin midia-query($res-min, $res-max){
+  $query: "";
+  @if $res-min != "" {
+    $query: " and (min-width: " + $res-min + ")";
+  }
+  @if $res-max != "" {
+    $query: $query + " and (max-width: " + $res-max + ") ";
+  }
+  $query: " only screen" + $query;
+  @media #{$query} {
+        @content;
+    }
+}
+$enable-unit-rem: true !default;
+$enable-unit-vw: false !default;
+@mixin vw-content{
+  @if $enable-unit-vw {
+    @content;
+  }
+}
+@mixin inline-block{
+  display: inline-block;
+  *display: inline;
+  *zoom:1;
+}
+
+@function pxToRem($value, $base:750) {
+    @if unit($value) == "px" or unit($value) == "" {
+      @return (strip-unit($value) / ($base / 10)) * 1rem;
+    }@else {
+      @return $value;
+    }
+
+
+}
+
+
+@mixin unit-calc($property, $values...) {
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+  $vwValues: '';
+  $status: ($enable-unit-rem or $enable-unit-vw);
+  @for $i from 1 through $max {
+    $item: nth($values, $i);
+    @if ((type-of($item) == "number") and status) {
+      $unit: to-lower-case(unit($item));
+      @if $unit == "px" {
+        $value: strip-unit($item);
+        @if $enable-unit-rem {
+          $remValues: #{$remValues + rem-calc($value)};
+          //$remValues: #{$remValues + pxToRem($value)};
+        }
+        @if $enable-unit-vw {
+          $vwValues: #{$vwValues + vw-calc($value)};
+        }
+      }
+      @else {
+        @if $enable-unit-rem {
+          $remValues: #{$remValues + $item};
+        }
+        @if $enable-unit-vw {
+          $vwValues: #{$vwValues + $item};
+        }
+      }
+    }
+    @else {
+      @if $enable-unit-rem {
+        $remValues: #{$remValues + $item};
+      }
+      @if $enable-unit-vw {
+        $vwValues: #{$vwValues + $item};
+      }
+      @if $status == false {
+        $pxValues: #{$pxValues + $item};
+      }
+    }
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+      $vwValues: #{$vwValues + " "};
+      @if $status == false {
+        $pxValues: #{$pxValues + " "};
+      }
+    }
+  }
+  @if $enable-unit-rem {
+    #{$property}: $remValues;
+  }
+  @if $enable-unit-vw {
+    #{$property}: $vwValues;
+  }
+  @if $status == false {
+    #{$property}: $pxValues;
+  }
+}
+
+// gradient
+@mixin gra($begin,$end){
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($begin), to($end));
+  background-image: -webkit-linear-gradient(top, $begin, $end);
+  background-image:    -moz-linear-gradient(top, $begin, $end);
+  background-image:      -o-linear-gradient(top, $begin, $end);
+  background-image:         linear-gradient(top, $begin, $end);
+}
+
+//ellipsis
+@mixin ellipsis($line){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @if ($line == 1) {
+        white-space: nowrap;
+    }@else{
+        display: -webkit-box;
+        -webkit-line-clamp: $line;
+        -webkit-box-orient: vertical;
+    }
+}

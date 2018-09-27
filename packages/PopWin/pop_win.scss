@@ -1,0 +1,232 @@
+    $carLifeConfig:(
+        'row-blank': rem-calc(40px),
+        'padding-left': rem-calc(20px),
+        'color-border': #e5e5e5,
+        'color-bg': #fff
+    );
+    $popConfig: (
+        'color-main': #d71414, //主色调红色
+        'color-txt-3': #333, //主体字体色
+        'color-border': #bbb, //边框线的颜色
+    );
+    .pop-move-cont{
+        width: 100%;
+        height: 100%;
+        font-size:rem-calc(20px);
+    }
+    .mui-cover-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 100;
+        display:none;
+    }
+    .pop-moveToBottom,.pop-moveToTop,.pop-moveToLeft,.pop-moveToRight{
+        display: none;
+        position: fixed;
+        z-index: 1999;
+        height:100%;
+        width:100%;
+        background-color: #fff;
+        transition: -webkit-transform 0.2s cubic-bezier(0, 0, 0.25, 1);
+        transition: transform 0.2s cubic-bezier(0, 0, 0.25, 1);
+    }
+
+    .pop-moveToBottom{
+        right: 0;
+        left: 0;
+        top:0;
+        -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+        &.show{
+            -webkit-transform: translate3d(0, 0, 0);
+                    transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .pop-moveToTop{
+        right: 0;
+        left: 0;
+        bottom:0;
+        -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0);
+        &.show{
+            -webkit-transform: translate3d(0, 0, 0);
+                    transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .pop-moveToLeft{
+        right: 0;
+        bottom:0;
+        top:0;
+        -webkit-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0);
+        &.show{
+            -webkit-transform: translate3d(0, 0, 0);
+                    transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .pop-moveToRight{
+        left: 0;
+        bottom:0;
+        top:0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+
+        &.show{
+            -webkit-transform: translate3d(0, 0, 0);
+                    transform: translate3d(0, 0, 0);
+        }
+    }
+    .pop-hd{
+        .goback{
+            float:left;
+            width:rem-calc(120px);
+            font-size:rem-calc(26px);
+            display:none;
+        }
+        .show{
+            display:block;
+        }
+        h2{
+                float:left;
+                font-size:rem-calc(36px);
+            }
+    }
+    .pop-moveToBottom .pop-hd,.pop-moveToTop .pop-hd,.pop-moveToLeft .pop-hd,.pop-moveToRight .pop-hd{
+        position: relative;
+        padding: 0 .3rem;
+        height: .92rem;
+        border-bottom: 1px solid map-get($popConfig,'color-border');
+        line-height: .92rem;
+    }
+
+    .pop-moveToBottom,.pop-moveToTop,.pop-moveToLeft,.pop-moveToRight{
+        .pop-tit{
+            padding: 0;
+            font-size: .32rem;
+            font-weight: normal;
+            color: map-get($popConfig,'color-txt-3');
+            text-align: center;
+        }
+        .pop-close,.pop-return{
+            position: absolute;
+            top: 0;
+            width: .92rem;
+            height: .92rem;
+            text-align: center;
+            i{
+                display: inline-block;
+                vertical-align: middle;
+                width: .4rem;
+                height: .4rem;
+            }
+        }
+        .pop-close{
+            right: 0;
+            font-size:0;
+            i{
+                // margin-top:0.2rem;
+                width: rem-calc(22px);
+                height:rem-calc(22px);
+                background: url(img/icon-close.png);
+                background-size:100%;
+            }
+        }
+
+        .pop-return{
+            left: 0;
+            text-align:left;
+            font-size:0;
+            i{
+                width: rem-calc(18px);
+                height:rem-calc(32px);
+                background: url(img/icon-arrow.png);
+                background-size:100%;
+                margin-left:0.22rem;
+            }
+        }
+
+        // body 自动伸缩
+        &.auto-height{
+            height: auto;
+            .pop-body{
+                position:static;
+                max-height:8rem;
+            }
+
+            // 有按钮 栏 情况
+            &.has-footer{
+                .pop-body{
+                    margin-bottom: 0.96rem;
+                }
+            }
+        }
+
+        // 没有 按钮栏 情况
+        .no-footer{
+            .pop-body{
+                bottom: 0;
+            }
+        }
+        // 没有 标题栏 情况
+        .no-header{
+            .pop-body{
+                top: 0;
+            }
+        }
+
+        .pop-body{
+            position: absolute;
+            top: .92rem;
+            left: 0;
+            right: 0;
+            bottom: 0.96rem;
+            padding:rem-calc(20px);
+            -webkit-overflow-scrolling: touch;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,'\5b8b\4f53',sans-serif;
+        }
+        .pop-footer{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+             .finish-btn{
+                height: 0.96rem;
+                line-height: 0.96rem;
+                background: map-get($popConfig,'color-main');
+                font-size: .32rem;
+                color: #fff;
+                border: 0;
+                width: 100%
+            }
+            .pre-tips{
+                height: .44rem;
+                line-height: .44rem;
+                color: map-get($popConfig,'color-main');
+                text-align: center;
+                font-size: .2rem;
+                border-top: 1px solid #e5e5e5;
+                background-color: #fff
+            }
+            .disabled{
+                background: #d9d9d9
+            }
+        }
+    }
+
+    .sidebar-move{
+        height: 100%;
+        overflow: hidden;
+    }
+    .sidebar-move body{
+        height: 100%;
+        overflow: hidden;
+    }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test el.classList</title>
+</head>
+<body>
+    <h1>test elem.classList属性</h1>
+    <div class="red blue green" id="div1">
+        我有三个class： red blue green
+    </div>
+    <script>
+        var obj = document.getElementById('div1');
+        console.log(obj.classList);
+        console.log(obj.classList.contains('red'));
+        obj.classList.add('red');
+        console.log(obj.classList);
+    </script>
+
+    <h1>test merge.js</h1>
+    <script>
+        function copyHasOwnProp (target) {
+            for (let i = 0, j = arguments.length; i < j; i++) {
+                let source = arguments[i] || {};
+                for (let prop in source) {
+                    // hasOwnProperty 判断一个对象， 是否有指定的属性值 ， 该属性必须是对象本身的一个直接成员
+                    if (source.hasOwnProperty(prop)) {
+                        let value = source[prop];
+                        if (value !== undefined) {
+                            target[prop] = value;
+                        }
+                    }
+                }
+            };
+            return target;
+        }
+        var source1 = {
+            a: 'aa',
+            b: 'bb',
+            obj1: {
+                c: 'cc',
+                obj2: {
+                    d: 'dd'
+                }
+            }
+        };
+        var source2 = {
+            e: 'ee',
+            f: 'ff',
+            obj3: {
+                g: 'gg'
+            }
+        };
+        var target = {};
+        copyHasOwnProp(target, source1, source2);
+        console.log('target11111111111111');
+        console.log(target);
+
+
+        class Shape {
+            constuctor(name) {
+                this.name = name;
+            }
+            sayName () {
+                console.log(this.name);
+            }
+        }
+        var s1 = new Shape('s1');
+        var s2 = {
+            name: 's2',
+            sayName: function(){
+                console.log(this.name);
+            }
+        }
+        var target2 = {};
+        target2 = copyHasOwnProp(target2, s1, s2);
+        console.log('target22222222222');
+        console.log(target2);
+    </script>
+</body>
+</html>

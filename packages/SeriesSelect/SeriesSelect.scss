@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+// $skinNotice:creatSprite("_icons/*.png");
+$formItemConfig:(
+    'height': rem-calc(96px),
+    'color-bg':#fff,
+    'padding-left': rem-calc(20px),
+    'warning-margin-left': rem-calc(4px),
+    'input-margin-left': rem-calc(10px),
+    'input-padding-top': rem-calc(18px),
+    'input-padding-left': rem-calc(8px),
+    'input-height': rem-calc(60px),
+    'item-margin-left':rem-calc(10px),
+    'icon-width':16px,
+ );
+.form-collect {
+    padding-bottom: rem-calc(40px);
+    background: #fff;
+    font-size: rem-calc(28px);
+    .form {
+        &-field {
+            padding-left: rem-calc(30px);
+            .icon-more {
+                display: block;
+                @extend %flexNone;
+                margin-left: map-get($formItemConfig, 'input-padding-left');
+                // @include iconItemRem($skinNotice, "icon-arrow");
+            }
+            .arrow-area {
+                @extend %flexNone;
+                width: rem-calc(60px);
+                height: rem-calc(60px);
+            }
+            .icon-clear {
+                display: none;
+                // @include iconItemRem($skinNotice, "icon-clear");
+            }
+        }
+        &-item {
+            @extend %flexCont;
+            @extend %flexVertical;
+            @extend %flexAverage;
+            border-bottom: 1px solid #dedede;
+            color: map-get($cxGlobal, 'color-txt-3');
+            .label-like {
+                display: block;
+                @extend %flexNone;
+                width: rem-calc(160px);
+                padding: map-get($formItemConfig, 'input-padding-top') 0;
+                line-height: map-get($formItemConfig, 'input-height');
+                color: map-get($cxGlobal, 'color-txt-75');
+            }
+            .input {
+                @extend %flexItem;
+                margin-left: map-get($formItemConfig, 'input-margin-left');
+                padding: map-get($formItemConfig, 'input-padding-top') 0 map-get($formItemConfig, 'input-padding-top') map-get($formItemConfig, 'input-padding-left');
+                .inp {
+                    width: 100%;
+                    border: none;
+                    height: map-get($formItemConfig, 'input-height');
+                    background: map-get($formItemConfig, 'color-bg');
+                    line-height: map-get($formItemConfig, 'input-height');
+                }
+                .item {
+                    margin-left: map-get($formItemConfig, 'item-margin-left');
+                    color: map-get($cxGlobal, 'color-txt-6');
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+    .btn-area {
+        margin: rem-calc(40px 20px 0);
+        text-align: center;
+    }
+    .btn-submit {
+        display: block;
+        border: 0 none;
+        width: 100%;
+        height: rem-calc(80px);
+        background-color: #c71445;
+        border-radius: rem-calc(6px);
+        font-size: rem-calc(34px);
+        color: #fff;
+        text-align: center;
+        line-height: rem-calc(80px);
+    }
+    .btn-submit-disabled {
+        background-color: $color-gray-dark;
+    }
+    .agree-checkbox {
+        margin-top: 5px;
+        display: inline-block;
+        input[type="checkbox"] {
+            vertical-align: middle;
+            -webkit-appearance: checkbox;
+            -moz-appearance: checkbox;
+            appearance: auto;
+        }
+        a {
+            color: $color-blue;
+        }
+    }
+}
+
+/* 弹框样式 start */
+.mui-cover-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.mui-pop-module{
+    position: fixed;
+    z-index: 1999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+    transition: all .4s ease-out 0s;
+    background-color: #fff;
+    &.show {
+        transform: translateX(0px);
+    }
+    .pop-close{
+        position:absolute;
+        top: 0;
+        left:0;
+    }
+    .pop-tit{
+        padding:0;
+        font-weight: normal;
+        text-align:center;
+    }
+    .pop-body{
+        position: absolute;
+        top: rem-calc(76px);
+        left: 0;
+        right: 0;
+        bottom: rem-calc(100px);
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
+.s-car-selector{
+    left:25%;
+    width:75%;
+    .pop-close{
+        padding:0 5%;
+        color:#999;
+    }
+    .pop-hd{
+        position:relative;
+        padding: rem-calc(0 20px);
+        height: rem-calc(66px);
+        border-bottom:1px solid #e7e7e7;
+        line-height: rem-calc(66px);
+        font-size:rem-calc(24px);
+    }
+    .pop-tit{
+        color:$color-black;
+    }
+    .pop-body{
+        top: rem-calc(67px);
+        bottom:0;
+        background:#fff;
+    }
+    .car-cont{
+        dt,dd{
+                    border-bottom:1px solid $border-color-gray;
+                    @include unit-calc(padding,0,20px);
+                    @include ellipsis(1);
+            }
+        dt{
+                text-align:center;
+                @include unit-calc(height,66px);
+                @include unit-calc(line-height,66px);
+                @include unit-calc(font-size,28px);
+                color:$color-black;
+                position:relative;
+        }
+        dt.volkswagen-bg{
+            background-color:$color-gray-light;
+        }
+        dd{
+                text-align:left;
+                @include unit-calc(font-size,24px);
+                color:#666666;
+                @include unit-calc(height,82px);
+                @include unit-calc(line-height,82px);
+                @include unit-calc(padding-right,30px);
+        }
+        dd.selected-item{
+            color:#E51C23;
+            background:url(#{$imgurl-base}public/collect-form/img/icon-list-selected.png) no-repeat right center;
+            @include unit-calc(background-size,30px,30px);
+        }
+        i.sub-back{
+            position:absolute;
+            @include unit-calc(left,18.75px);
+            @include unit-calc(top,19.5px);
+        }
+}
+
+}

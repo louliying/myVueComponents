@@ -1,0 +1,40 @@
+@charset "UTF-8";
+// Author:Amanda Description: 移动端基础配置
+$enable-unit-vw: false;
+$vm-base:750px;
+
+$width-base:750;
+$height-base:1334;
+// 图片路径
+$imgurl-base: "/msmallmobile/";
+// rem-calc的基础值
+$rem-base: 100px;
+
+$color-gray-dark:#d8d8d8;
+$color-blue:#03A9F4;
+$color-black:#333333;
+$border-color-gray:#e7e7e7;
+$color-gray-light:#f5f5f5;
+//width
+%width {
+	min-width: 320px;
+	width: 100%;
+}
+
+%wrap {
+	margin: 0 auto;
+	min-width: 320px;
+}
+
+
+
+// 全局设置 map-get($cxGlobal,'color-bg');
+$cxGlobal: (
+	'color-bg': #f5f5f5, //页面背景色
+	'color-main': #d71414, //主色调红色
+	'color-txt-3': #333, //主体字体色
+	'color-txt-6': #666, //弱一点的字体色
+	'color-txt-9': #999, //more的字体色
+	'color-border': #ddd, //边框线的颜色
+	'color-btn-border': #bbb, //按钮边框线的颜色
+);
